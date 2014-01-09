@@ -1,0 +1,81 @@
+body {
+	background: #333;
+}
+
+header {
+	background: #1abc9c;
+	text-align: center;
+}
+
+header h1 {
+	font-size: 14px;
+	color: #FFF;
+	margin: 0;
+	line-height: 42px;
+	text-indent: 10px;
+}
+
+header h1 .sub {
+	font-size: 14px;
+	font-weight: 100;
+}
+
+header span.fui-list {
+	position: absolute;
+	left: 0;
+}
+
+.map {
+	position: absolute;
+}
+
+.map img {
+	width: 1452px;
+}
+
+.control {
+	background: #ECF0F1;
+	left: 80px;
+	width: 240px;
+	padding: 0 10px 0 10px;
+	z-index: 9999;
+}
+
+.cbp-spmenu h3.control-title {
+	line-height: 40px;
+	background: #34495E;
+	width: 240px;
+	color: #FFF;
+	text-indent: 10px;
+	border-bottom: 1px solid #2C3E50 ;
+	font-size: 14px;
+	padding: 0;
+}
+
+.control-title span {
+	margin-right: 10px;
+}
+
+.config-card {
+	background: #FFF;
+	padding: 10px;
+	margin-bottom: 10px;	
+}
+
+.config-card .btn{
+	width: 100%;	
+}
+
+.config-card .title{
+	font-size: 14px;
+	border-bottom: #ECF0F1 1px solid;
+}
+
+.customer-value p {
+	font-size: 11px;
+	color: #666;
+}
+
+.no-margin {
+	margin: 0;
+}

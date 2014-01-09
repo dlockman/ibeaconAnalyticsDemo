@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="map" id="heatmapArea">
+        <img src="images/TWR NRF14 Booth BirdsEye2.jpg" alt="">
+</div>
+<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/heatmap.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+ 
+    // heatmap configuration
+    var config = {
+        element: document.getElementById("heatmapArea"),
+        radius: 30,
+        opacity: 50,
+        legend: {
+            position: 'br',
+            title: 'Mouse Movement Distribution'
+        }   
+    };
+    
+    //creates and initializes the heatmap
+    var heatmap = h337.create(config);
+ 
+    var active = true,
+        idle = false,
+        over = false,
+        x = 0,
+        y = 0,
+        mouseDown = false,
+        simulate = false;
+ 
+    // activate capture mode
+    setInterval(function(){
+        active = true;
+    }, 80);
+ 
+    // check whether the mouse is idling
+    var idlechecker = setInterval(function(){
+        if(over && !simulate && mouseDown){
+            // if it's idling -> start the simulation 
+            // and add the last x/y coords
+            simulate = setInterval(function(){
+                heatmap.store.addDataPoint(x, y, 1);
+            }, 1000);
+        }
+        else if(!mouseDown){
+            clearInterval(simulate);
+        }
+    }, 150);
+        
+    var add = function(e){
+        x = e.layerX;
+        y = e.layerY
+        heatmap.store.addDataPoint(x, y, 1);
+    };
+ 
+    var element = document.getElementById("heatmapArea");
+
+    element.onmousedown = function(e){
+        mouseDown = true;
+    }
+
+    element.onmouseup = function(e){
+        mouseDown = false;
+    }
+
+    element.onmousemove = function(e){
+        over = true;
+        if(simulate){
+            clearInterval(simulate);
+            simulate = false;
+        }
+ 
+        if(active && mouseDown){
+            add(e);
+            active = false;
+        }
+    };
+    element.onclick = function(e){
+        add(e);
+    };
+    element.onmouseout = function(){
+        over = false;
+    };
+
+    element.onmousewheel = function(){
+        var dataSet = heatmap.store.exportDataSet();
+        var segment = window.prompt("Please Choose Segment","1");
+        var timeWindow = window.prompt("Please Choose Time Window","1");
+        var structuredData = {'data':dataSet, 'segment':segment, 'timeWindow':timeWindow};
+        var jsonData = JSON.stringify(structuredData);
+        jQuery.ajax({
+          type: "POST",
+          url: 'http://localhost:9000',
+          data: jsonData,
+          async: false,
+          success: function () {
+            alert('Successfully Saved!');
+          },
+          failure: function () { alert('Failed to communicate with server.');},
+          dataType: 'json'
+        });
+        
+    }
+};
+</script>
+</html>
