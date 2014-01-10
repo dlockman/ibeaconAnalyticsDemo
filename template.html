@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flat UI - Free User Interface Kit</title>
+    <title>iBeacon Analytics</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
@@ -15,6 +15,7 @@
     <link href="css/font.css" rel="stylesheet">
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/tooltip.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" />
 
     <link rel="shortcut icon" href="images/favicon.ico">
 
@@ -36,27 +37,27 @@
     <!-- body has the class "cbp-spmenu-push" -->
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">          
       <div id="accordion">
-        <h3 class="control-title"><span class="icon-fire"></span>Heat Map</h3>
-        <div class="control">
+        <h3 class="control-title"><span class="icon-fire"></span>Heat Maps</h3>
+        <div class="control" id="heatmapOptions">
           <div class="config-card customer-value">
               <div class="title">Customer Segments by Value</div>
               
               <label class="checkbox checked" for="checkbox1">
                 <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
                 <strong>Quick Shopper</strong>
-                <p> < 15min | 100$+ </p>
+                <p> < 15min | < $100 </p>
               </label>
               
               <label class="checkbox checked" for="checkbox2">
                 <input type="checkbox" value="" id="checkbox2" data-toggle="checkbox">         
-                <strong>Shopping Minia</strong>
-                <p> < 15min | 100$+ </p>
+                <strong>Shopping Mania</strong>
+                <p> < 15min | > $100 </p>
               </label>
               
               <label class="checkbox checked" for="checkbox3">
                 <input type="checkbox" value="" id="checkbox3" data-toggle="checkbox">       
                 <strong>See More Buy Less</strong>
-                <p> > 60min | < 50$ </p>
+                <p> > 60min | < $50 </p>
               </label>
           </div>  
             
@@ -74,13 +75,13 @@
             </label>
             
             <label class="radio">
-              <input type="radio" name="group1" value="2" data-toggle="radio" >
+              <input type="radio" name="group1" value="3" data-toggle="radio" >
                 6pm-10pm
             </label>
           </div>
         </div>
-        <h3 class="control-title"><span class="icon-exchange"></span>Conversion</h3>
-        <div class="control">
+        <h3 class="control-title"><span class="icon-exchange"></span>Conversion Rates</h3>
+        <div class="control" id="conversionRateOptions">
           <div class="config-card">
               <div class="title">A/B Testing</div>
               

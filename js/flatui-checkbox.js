@@ -29,6 +29,8 @@
 				
 				$el.prop('disabled') && $parent.addClass('disabled');		
 				$el.prop('checked') && $parent.addClass('checked');
+				e = $.Event('toggle');
+				$el.trigger(e).trigger('change'); 
 		}	 
 		
 	, toggle: function () {		 
@@ -40,7 +42,7 @@
 			
 			if ($el.prop('disabled') == false) {
 				$parent.toggleClass(ch) && checked ? $el.removeAttr(ch) : $el.prop(ch, ch);
-				$el.trigger(e).trigger('change'); 
+				//$el.trigger(e).trigger('change'); 
 			}
 		}	 
 		

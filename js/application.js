@@ -94,39 +94,52 @@ String.prototype.repeat = function(num) {
     // Tooltip
     $('#example').popover()
 
+    //$('#accordion').accordion();
+
+    var openPanel = $('#heatmapOptions');
+    var allPanels = $('#accordion > .control').hide();
+
+
+    $('#accordion > h3').click(function() {
+      allPanels.slideUp();
+      openPanel = $(this).next();
+      $(this).next().slideDown();
+      $('#checkbox1').change();
+      return false;
+    });
+
     $('input').on('change', function (e) {
-      // var opts = {
-      //   lines: 13, // The number of lines to draw
-      //   length: 11, // The length of each line
-      //   width: 5, // The line thickness
-      //   radius: 17, // The radius of the inner circle
-      //   corners: 1, // Corner roundness (0..1)
-      //   rotate: 0, // The rotation offset
-      //   color: '#FFF', // #rgb or #rrggbb
-      //   speed: 1, // Rounds per second
-      //   trail: 60, // Afterglow percentage
-      //   shadow: false, // Whether to render a shadow
-      //   hwaccel: false, // Whether to use hardware acceleration
-      //   className: 'spinner', // The CSS class to assign to the spinner
-      //   zIndex: 2e9, // The z-index (defaults to 2000000000)
-      //   top: 'auto', // Top position relative to parent in px
-      //   left: 'auto' // Left position relative to parent in px
-      // };
-      // var target = document.createElement("div");
-      // document.body.appendChild(target);
-      // var spinner = new Spinner(opts).spin(target);
-      // var loadNotification = iosOverlay({
-      //   text: "Loading",
-      //   duration: 2000,
-      //   spinner: spinner
-      // });
-      var check1 = $("label[for='"+$('#checkbox1').attr('id')+"']").hasClass('checked');
-      var check2 = $("label[for='"+$('#checkbox2').attr('id')+"']").hasClass('checked');
-      var check3 = $("label[for='"+$('#checkbox3').attr('id')+"']").hasClass('checked');
-      var timeChoice = $('input[name=group1]:checked').val();
-      generateHeatMap(check1,check2,check3,timeChoice);
-      //loadNotification.hide();
-    })
+      
+      $( '#mapArea' ).replaceWith( '<div class="map" id="mapArea"><img src="images/background.png" alt=""></div>"' );
+      if(openPanel.attr('id') == "heatmapOptions")
+      {
+        var check1 = $("label[for='"+$('#checkbox1').attr('id')+"']").hasClass('checked');
+        var check2 = $("label[for='"+$('#checkbox2').attr('id')+"']").hasClass('checked');
+        var check3 = $("label[for='"+$('#checkbox3').attr('id')+"']").hasClass('checked');
+        var timeChoice = $('input[name=group1]:checked').val();
+        generateHeatMap(check1,check2,check3,timeChoice);
+      }
+      else
+      {
+        var conversionChoice = $('input[name=group2]:checked').val();
+        if(conversionChoice == 1)
+        {
+          $( '#mapArea' ).replaceWith( '<div class="map" id="mapArea"><img src="images/plan-a.png" alt=""></div>"' );
+        }
+        else if(conversionChoice ==2)
+        {
+          $( '#mapArea' ).replaceWith( '<div class="map" id="mapArea"><img src="images/plan-b.png" alt=""></div>"' );
+        }
+        else
+        {
+          $( '#mapArea' ).replaceWith( '<div class="map" id="mapArea"><img src="images/compare.png" alt=""></div>"' );
+        }
+      }
+    });
+
+    $('.active-menu').slideDown();
+    $('#heatmapOptions').slideDown();
+    $('#checkbox1').change();
 
   });
   
